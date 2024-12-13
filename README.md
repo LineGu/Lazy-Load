@@ -37,8 +37,8 @@ import { Component } from '@/module';
 
 You can use the configuration like the example below by adding the plugin to the Babel config:
 
-```json
-{
+```js
+const babelConfig = {
   presets: [
     require.resolve('@babel/preset-env'),
     require.resolve('next/babel'),
@@ -49,9 +49,13 @@ You can use the configuration like the example below by adding the plugin to the
       },
     ],
   ],
-  plugins: [require.resolve('babel-plugin-macros')],
-}
+  plugins: [require.resolve('lazy-load-helper/plugin')],
+};
+
+export default babelConfig;
 ```
+
+Note: A plugin for SWC will be provided soon. Stay tuned!
 
 ### What Happens Behind the Scenes
 
