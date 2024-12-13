@@ -17,3 +17,6 @@
 *.pem
 
 *.tsbuildinfo
+
+dist/
+esm/

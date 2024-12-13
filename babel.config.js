@@ -4,4 +4,5 @@ module.exports = {
     require.resolve('@babel/preset-typescript'),
     require.resolve('@babel/preset-react'),
   ],
+  plugins: [require.resolve('@babel/plugin-transform-runtime')],
 };

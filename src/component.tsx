@@ -61,7 +61,3 @@ export const Lazy = forwardRef<ImperativeHandler, Props>(function Lazy(
 
   return <>{children}</>;
 });
-
-<Lazy ssr prefetchOnMount>
-  <Component />
-</Lazy>;
