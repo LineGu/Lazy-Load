@@ -8,7 +8,7 @@ on:
       - synchronize
 
 jobs:
-  package-publish:
+  bump-version:
     name: Bump Version
     runs-on: ubuntu-latest
 
