@@ -35,7 +35,5 @@ jobs:
       - name: Install
         run: yarn install
 
-      - name: 배포
-        if: ${{ steps.bump-commit.outputs.HAS_BUMP_COMMIT == 'true' }}
-        run: |
-          yarn npm publish
+      - name: publish
+        run: yarn npm publish
