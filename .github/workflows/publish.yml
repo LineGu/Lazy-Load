@@ -36,4 +36,6 @@ jobs:
         run: yarn install
 
       - name: publish
-        run: yarn npm publish
+        run: |
+          echo "npmAuthToken: ${{ secrets.NPM_TOKEN }}" | tee $HOME/.yarnrc.yml
+          yarn npm publish --access=public
