@@ -8,8 +8,10 @@ const Mobile = dynamic(__Mobile_Fetcher, {
 
 export default function Test() {
   return (
-    <Lazy ssr _prefetchers={[__Mobile_Fetcher]}>
-      <Mobile.Button>버튼</Mobile.Button>
-    </Lazy>
+    <>
+      <Lazy ssr _prefetchers={[__Mobile_Fetcher]}>
+        <Mobile>버튼</Mobile>
+      </Lazy>
+    </>
   );
 }

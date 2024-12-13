@@ -19,46 +19,51 @@ const readErrorTestCaseFile = (caseName: string) => ({
 });
 
 describe('lazy-load-component', () => {
-  it('기본적인 동작을 문제 없이 수행한다. import function, dynamic import 생성 및 import 구문 제거 (named import, default import)', async () => {
+  it('Performs basic operations without issues: creation of import functions, dynamic imports, and removal of import statements (named imports and default imports).', async () => {
     const { origin, result } = readTestCaseFile('basic');
     expect(transform(origin, [[plugin]])).toBe(transform(result));
   });
 
-  it('조건부 렌더링 환경에서도 dynamic 처리에 성공한다.', async () => {
+  it('Successfully handles dynamic processing even in conditional rendering environments.', async () => {
     const { origin, result } = readTestCaseFile('conditionalRender');
     expect(transform(origin, [[plugin]])).toBe(transform(result));
   });
 
-  it('컴파운트 패턴의 자식도 dynamic 처리에 성공한다.', async () => {
+  it('Successfully handles dynamic processing for children in compound patterns.', async () => {
     const { origin, result } = readTestCaseFile('compoundPattern');
     expect(transform(origin, [[plugin]])).toBe(transform(result));
   });
 
-  it('Lazy의 자식은 일반적인 OpeningElement 형식의 Children이다.', async () => {
+  it('Maintains the existing dynamic import if it is already applied.', async () => {
+    const { origin, result } = readTestCaseFile('duplicate');
+    expect(transform(origin, [[plugin]])).toBe(transform(result));
+  });
+
+  it('The children of Lazy are standard OpeningElement type children.', async () => {
     const { origin } = readErrorTestCaseFile('notOpeningElementChildPattern');
     expect(() => transform(origin, [[plugin]])).toThrowError(
-      '유효하지 않은 자식 형식입니다.'
+      'Invalid child type.'
     );
   });
 
-  it('Lazy 컴포넌트의 Children은 단일 자식이다.', async () => {
+  it('The children of a Lazy component are a single child.', async () => {
     const { origin } = readErrorTestCaseFile('onlyOneChild');
     expect(() => transform(origin, [[plugin]])).toThrowError(
-      'Lazy 컴포넌트의 Children은 단일 자식만 허용됩니다.'
+      'Children of a Lazy component are limited to a single child.'
     );
   });
 
-  it('Lazy 컴포넌트의 Children는 Fragment가 아니다', async () => {
+  it('The children of a Lazy component are not a Fragment.', async () => {
     const { origin } = readErrorTestCaseFile('notFragment');
     expect(() => transform(origin, [[plugin]])).toThrowError(
-      'Lazy 컴포넌트의 자식은 Fragment가 될 수 없습니다.'
+      'A child of a Lazy component cannot be a Fragment.'
     );
   });
 
-  it('Module로 불러온 컴포넌트만 Lazy가 가능하다', async () => {
+  it('Only components imported as a Module can be used with Lazy.', async () => {
     const { origin } = readErrorTestCaseFile('notModule');
     expect(() => transform(origin, [[plugin]])).toThrowError(
-      'Lazy Load할 컴포넌트의 import 경로값이 없습니다.'
+      'The import path for the component to be lazy-loaded is missing.'
     );
   });
 });
