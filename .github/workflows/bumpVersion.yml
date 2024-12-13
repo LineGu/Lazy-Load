@@ -13,7 +13,7 @@ jobs:
     name: Bump Version
     runs-on: ubuntu-latest
 
-    if: "!contains(github.event.head_commit.message, '[shallow]')"
+    if: "!contains(github.event.pull_request.title, '[shallow]')"
 
     strategy:
       matrix:
