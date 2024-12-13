@@ -3,7 +3,7 @@
     "type": "git",
     "url": "https://github.com/LineGu/Lazy-Load.git"
   },
-  "name": "lazy-load",
+  "name": "lazy-load-helper",
   "version": "0.0.4",
   "module": "./src/index.ts",
   "sideEffects": false,
