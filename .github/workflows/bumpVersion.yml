@@ -26,6 +26,7 @@ jobs:
         run: |
           if [[ "${{ github.event.pull_request.title }}" == *"[shallow]"* ]]; then
             echo "Workflow skipped due to [shallow] condition"
+            echo "SKIP_WORKFLOW=true" >> $GITHUB_ENV
             exit 0
           fi
 
@@ -37,6 +38,7 @@ jobs:
       - name: Get Current Version
         id: get-main-version
         run: |
+          if(SKIP_WORKFLOW)
           git checkout origin/main
 
           CURRENT_VERSION=$(cat package.json | jq -r .version)
@@ -49,6 +51,11 @@ jobs:
       - name: Bump version based on PR title
         id: bump-version
         run: |
+          if [[ "$SKIP_WORKFLOW" == "true" ]]; then
+            echo "Workflow is set to be skipped. Exiting..."
+            exit 0
+          fi
+
           # Extract PR title
           PR_TITLE="${{ github.event.pull_request.title }}"
 
@@ -78,6 +85,11 @@ jobs:
 
       - name: Commit updated package.json
         run: |
+          if [[ "$SKIP_WORKFLOW" == "true" ]]; then
+            echo "Workflow is set to be skipped. Exiting..."
+            exit 0
+          fi
+
           git config --global user.name "${{ secrets.BOT_NAME }}"
           git config --global user.email "${{ secrets.BOT_EMAIL }}"
           git add ./package.json
