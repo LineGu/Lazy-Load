@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic';
-import { Lazy } from 'lazy-load';
+import { Lazy } from 'lazy-load-helper';
 import { useState } from 'react';
 
 const __NewText_Fetcher = () => import('@/txt').then(({ NewText }) => NewText);

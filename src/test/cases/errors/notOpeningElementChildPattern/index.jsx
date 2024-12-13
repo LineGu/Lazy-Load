@@ -1,4 +1,4 @@
-import { Lazy } from 'lazy-load';
+import { Lazy } from 'lazy-load-helper';
 import { Mobile } from '@/mobile';
 
 const COMPONENT_MAP = {

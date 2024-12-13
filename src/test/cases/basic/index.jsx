@@ -1,4 +1,4 @@
-import { Lazy } from 'lazy-load';
+import { Lazy } from 'lazy-load-helper';
 import { Mobile } from '@/mobile';
 import DefaultComponent, { NewMobile, Another } from '@/new-mobile';
 import { Txt } from '@/txt';

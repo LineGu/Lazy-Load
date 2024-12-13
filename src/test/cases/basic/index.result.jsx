@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic';
-import { Lazy } from 'lazy-load';
+import { Lazy } from 'lazy-load-helper';
 import { Another } from '@/new-mobile';
 
 const __Wrapper_Fetcher = () =>

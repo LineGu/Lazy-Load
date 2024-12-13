@@ -34,6 +34,11 @@ describe('lazy-load-component', () => {
     expect(transform(origin, [[plugin]])).toBe(transform(result));
   });
 
+  it('이미 dynamic이 import된 경우 유지한다', async () => {
+    const { origin, result } = readTestCaseFile('duplicate');
+    expect(transform(origin, [[plugin]])).toBe(transform(result));
+  });
+
   it('Lazy의 자식은 일반적인 OpeningElement 형식의 Children이다.', async () => {
     const { origin } = readErrorTestCaseFile('notOpeningElementChildPattern');
     expect(() => transform(origin, [[plugin]])).toThrowError(

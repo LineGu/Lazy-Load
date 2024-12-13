@@ -27,12 +27,30 @@ yarn add lazy-load-next
 Instead of manually handling dynamic imports with `next/dynamic`, you can simply use the `<Lazy>` component to wrap any child component you want to load lazily.
 
 ```jsx
-import { Lazy } from 'lazy-load';
+import { Lazy } from 'lazy-load-helper';
 import { Component } from '@/module';
 
 <Lazy ssr prefetchOnMount>
   <Component />
 </Lazy>;
+```
+
+You can use the configuration like the example below by adding the plugin to the Babel config:
+
+```json
+{
+  presets: [
+    require.resolve('@babel/preset-env'),
+    require.resolve('next/babel'),
+    [
+      '@babel/preset-react',
+      {
+        runtime: 'automatic',
+      },
+    ],
+  ],
+  plugins: [require.resolve('babel-plugin-macros')],
+}
 ```
 
 ### What Happens Behind the Scenes
